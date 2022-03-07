@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+{% block body %}
+<h2>{{ ptitle }}</h2>
+<div class="Add_PLayer">
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <br>
+        {{ form.FirstName.label }} {{ form.FirstName }}
+        <br>
+        {{ form.LastName.label }} {{ form.LastName }}
+        <br>
+        {{ form.Possition.label }} {{ form.Possition }}
+        <br>
+        {{ form.Team_id.label }} {{ form.Team_id }}
+        <br>
+        {{ form.submit }}
+    </form>
+    {% if message %}
+    {{ message }}
+    {% endif %}
+</div>
+{% endblock body %}
