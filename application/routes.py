@@ -18,7 +18,7 @@ def create():
     if request.method == 'POST':
         if not form.validate_on_submit():
             message = "Player name cannot be blank"
-            return render_template('Add_Player.html', form = form, ptitle = "Add Player", message = message)
+            return render_template('add_player.html', form = form, ptitle = "Add Player", message = message)
         FirstName = form.FirstName.data
         LastName = form.LastName.data
         Possition = form.Possition.data
@@ -30,7 +30,7 @@ def create():
     return render_template('add_player.html', form = form, ptitle = "Add Player", message = message)
 
 @app.route('/create-team', methods=['GET', 'POST'])
-def create_project():
+def create_team():
     message = None
     form = AddTeam()
     if request.method == 'POST':
@@ -42,13 +42,13 @@ def create_project():
                 except IndexError:
                     err = ""
                 message += err + ", "
-            return render_template('Add_Team.html', form = form, message = message)
-        TeamName = form.TeamName.Data
-        AddTeam= Team(TeamName = TeamName)
-        db.session.add(AddTeam)
+            return render_template('add_team.html', form = form, message = message)
+        TeamName = form.TeamName.data
+        AddNewTeam= Team(TeamName = TeamName)
+        db.session.add(AddNewTeam)
         db.session.commit()
         return redirect(url_for('home'))
-    return render_template('AddTeam.html', form = form, message = message)
+    return render_template('add_team.html', form = form, message = message)
 
 @app.route('/update/<int:pk>', methods=['GET', 'POST'])
 def update(pk):
