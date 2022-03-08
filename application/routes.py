@@ -7,7 +7,10 @@ from application.forms import AddPlayerName, AddPlayerName, AddTeam
 def home():
     num_Players = Player.query.count()
     Players = Player.query.all()
-    return render_template('index.html', num = num_Players, Players = Players)
+    Teams = Team.query.all()
+
+    return render_template('index.html', num = num_Players, Players = Players, Teams = Teams)
+    
   
 
 @app.route('/create-player', methods=['GET', 'POST'])
@@ -22,9 +25,9 @@ def create():
             return render_template('add_player.html', form = form, ptitle = "Add Player", message = message)
         FirstName = form.FirstName.data
         LastName = form.LastName.data
-        Possition = form.Possition.data
+        Position = form.Position.data
         Team_id = int(form.Team_id.data)
-        new_player = Player(FirstName = FirstName, LastName = LastName, Possition = Possition, Team_id = Team_id)
+        new_player = Player(FirstName = FirstName, LastName = LastName, Position = Position, Team_id = Team_id)
         db.session.add(new_player)
         db.session.commit()
         return redirect(url_for('home'))
@@ -60,7 +63,7 @@ def update(pk):
     if request.method == 'POST':
         player.FirstName = form.FirstName.data
         player.LastName = form.LastName.data
-        player.Possition = form.Possition.data
+        player.Position = form.Position.data
         player.Team_id = int(form.team_id.data)
         db.session.commit()
         return redirect(url_for('home'))

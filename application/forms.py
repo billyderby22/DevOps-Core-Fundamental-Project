@@ -7,7 +7,7 @@ from application.models import Player, Team
 class AddPlayerName(FlaskForm):
     FirstName = StringField("Player First Name")
     LastName = StringField("Player Last Name")
-    Possition = SelectField("Possition", choices=[('Forward', 'Forward'), ('Midfielder', 'Midfielder'), ('Defender', 'Defender'),('GoalKeeper', 'GoalKeeper')])
+    Position = SelectField("Position", choices=[('Forward', 'Forward'), ('Midfielder', 'Midfielder'), ('Defender', 'Defender'),('GoalKeeper', 'GoalKeeper')])
     Team_id = SelectField("Players Team", choices=[])
     submit = SubmitField("Add Player")
 
