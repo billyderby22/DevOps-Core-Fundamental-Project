@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 {% block body %}
 <h2>{{ ptitle }}</h2>
-<div class="Add_PLayer">
+<div class="Add_Player">
     <form method="POST" action="">
         {{ form.hidden_tag() }}
         <br>
@@ -9,7 +9,7 @@
         <br>
         {{ form.LastName.label }} {{ form.LastName }}
         <br>
-        {{ form.Possition.label }} {{ form.Possition }}
+        {{ form.Position.label }} {{ form.Position }}
         <br>
         {{ form.Team_id.label }} {{ form.Team_id }}
         <br>

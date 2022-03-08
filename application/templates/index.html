@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+{% block body %}
+        <h2>Home</h2>
+        <p>There is {{ num }} players </p>
+ {% for team in Teams %}
+ {{team.TeamName}}: 
+ <br>
+ {% for player in Players %}
+ {% if player.team == team %}
+ {{player.LastName}}
+ <br>
+ {% endif %}
+ {% endfor %}
+ <br>
+ {% endfor %}
+
+{% endblock body %}

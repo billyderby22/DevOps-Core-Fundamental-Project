@@ -1,11 +1,11 @@
 {% extends 'layout.html' %}
 {% block body %}
-<h2>Add Team</h2>
-<div class="form">
+<h2>{{ ptitle }}</h2>
+<div class="add_team">
     <form method="POST" action="">
         {{ form.hidden_tag() }}
         <br>
-        {{ form.TeamName.label }} {{ form.teamName }}
+        {{ form.TeamName.label }} {{ form.TeamName }}
         <br>
         {{ form.submit }}
     </form>

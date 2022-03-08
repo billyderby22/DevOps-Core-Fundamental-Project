@@ -7,7 +7,11 @@ from application.forms import AddPlayerName, AddPlayerName, AddTeam
 def home():
     num_Players = Player.query.count()
     Players = Player.query.all()
-    return render_template('index.html', num = num_Players, Players = Players)
+    Teams = Team.query.all()
+
+    return render_template('index.html', num = num_Players, Players = Players, Teams = Teams)
+    
+  
 
 @app.route('/create-player', methods=['GET', 'POST'])
 def create():
@@ -18,19 +22,19 @@ def create():
     if request.method == 'POST':
         if not form.validate_on_submit():
             message = "Player name cannot be blank"
-            return render_template('Add_Player.html', form = form, ptitle = "Add Player", message = message)
+            return render_template('add_player.html', form = form, ptitle = "Add Player", message = message)
         FirstName = form.FirstName.data
         LastName = form.LastName.data
-        Possition = form.Possition.data
+        Position = form.Position.data
         Team_id = int(form.Team_id.data)
-        new_player = Player(FirstName = FirstName, LastName = LastName, Possition = Possition, Team_id = Team_id)
+        new_player = Player(FirstName = FirstName, LastName = LastName, Position = Position, Team_id = Team_id)
         db.session.add(new_player)
         db.session.commit()
         return redirect(url_for('home'))
     return render_template('add_player.html', form = form, ptitle = "Add Player", message = message)
 
 @app.route('/create-team', methods=['GET', 'POST'])
-def create_project():
+def create_team():
     message = None
     form = AddTeam()
     if request.method == 'POST':
@@ -42,32 +46,32 @@ def create_project():
                 except IndexError:
                     err = ""
                 message += err + ", "
-            return render_template('Add_Team.html', form = form, message = message)
-        TeamName = form.TeamName.Data
-        AddTeam= Team(TeamName = TeamName)
-        db.session.add(AddTeam)
+            return render_template('add_team.html', form = form, message = message)
+        TeamName = form.TeamName.data
+        AddNewTeam= Team(TeamName = TeamName)
+        db.session.add(AddNewTeam)
         db.session.commit()
         return redirect(url_for('home'))
-    return render_template('AddTeam.html', form = form, message = message)
+    return render_template('add_team.html', form = form, message = message)
 
 @app.route('/update/<int:pk>', methods=['GET', 'POST'])
 def update(pk):
-    Player = Player.query.get(pk)
-    Team = Team.query.all()
+    player = Player.query.get(pk)
+    teams = Team.query.all()
     form = AddPlayerName()
-    form.Team_id.choices.extend([(Team.pk, str(Team)) for Team in Teams])
+    form.Team_id.choices.extend([(team.pk, str(team)) for team in teams])
     if request.method == 'POST':
-        Player.FirstName = form.FirstName.data
-        Player.LastName = form.LastName.data
-        Player.Possition = form.Possition.data
-        Player.Team_id = int(form.team_id.data)
+        player.FirstName = form.FirstName.data
+        player.LastName = form.LastName.data
+        player.Position = form.Position.data
+        player.Team_id = int(form.team_id.data)
         db.session.commit()
         return redirect(url_for('home'))
-    return render_template('Add_Player.html', form = form, ptitle = "Update Player")
+    return render_template('add_player.html', form = form, ptitle = "Update Player")
 
 @app.route('/delete/<int:i>')
 def delete(i):
-    Player = Player.query.get(i)
-    db.session.delete(Player)
+    player = Player.query.get(i)
+    db.session.delete(player)
     db.session.commit()
     return redirect(url_for('home'))
