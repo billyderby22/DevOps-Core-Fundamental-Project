@@ -64,7 +64,7 @@ def update(pk):
         player.FirstName = form.FirstName.data
         player.LastName = form.LastName.data
         player.Position = form.Position.data
-        player.Team_id = int(form.team_id.data)
+        player.Team_id = int(form.Team_id.data)
         db.session.commit()
         return redirect(url_for('home'))
     return render_template('add_player.html', form = form, ptitle = "Update Player")
