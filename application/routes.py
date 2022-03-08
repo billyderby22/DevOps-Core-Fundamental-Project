@@ -8,6 +8,7 @@ def home():
     num_Players = Player.query.count()
     Players = Player.query.all()
     return render_template('index.html', num = num_Players, Players = Players)
+  
 
 @app.route('/create-player', methods=['GET', 'POST'])
 def create():
@@ -52,22 +53,22 @@ def create_team():
 
 @app.route('/update/<int:pk>', methods=['GET', 'POST'])
 def update(pk):
-    Player = Player.query.get(pk)
-    Team = Team.query.all()
+    player = Player.query.get(pk)
+    teams = Team.query.all()
     form = AddPlayerName()
-    form.Team_id.choices.extend([(Team.pk, str(Team)) for Team in Teams])
+    form.Team_id.choices.extend([(team.pk, str(team)) for team in teams])
     if request.method == 'POST':
-        Player.FirstName = form.FirstName.data
-        Player.LastName = form.LastName.data
-        Player.Possition = form.Possition.data
-        Player.Team_id = int(form.team_id.data)
+        player.FirstName = form.FirstName.data
+        player.LastName = form.LastName.data
+        player.Possition = form.Possition.data
+        player.Team_id = int(form.team_id.data)
         db.session.commit()
         return redirect(url_for('home'))
-    return render_template('Add_Player.html', form = form, ptitle = "Update Player")
+    return render_template('add_player.html', form = form, ptitle = "Update Player")
 
 @app.route('/delete/<int:i>')
 def delete(i):
-    Player = Player.query.get(i)
-    db.session.delete(Player)
+    player = Player.query.get(i)
+    db.session.delete(player)
     db.session.commit()
     return redirect(url_for('home'))
