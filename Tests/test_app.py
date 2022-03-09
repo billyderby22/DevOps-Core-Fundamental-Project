@@ -55,4 +55,29 @@ class TestAddTeam(TestBase):
         self.assert200(response)
         self.assertIn(b'Team Name', response.data)
 
-   
+    def test_creat_team_post(self):
+        response = self.client.post( 
+            url_for('create_team'),
+            data = dict(TeamName='southend'),
+            follow_redirects = True
+        )
+        self.assert200(response)
+        self.assertIn(b'southend', response.data)
+
+
+
+class TestDelete(TestBase):
+    def test_delete_player(self):
+        response = self.client.get(url_for('delete',i=1),follow_redirects=True)
+        self.assert200(response)
+        self.assertNotIn(b'Smith', response.data)
+
+
+
+class TestUpdate(TestBase):
+    def test_update_player(self):
+        response = self.client.post(url_for('update', pk=1),
+        data = dict(FirstName="Dave", LastName='allan', Position='Forward',Team_id = 1),
+        follow_redirects = True)
+        self.assert200(response)
+        self.assertIn(b'allan', response.data)
