@@ -36,16 +36,7 @@ def create():
 def create_team():
     message = None
     form = AddTeam()
-    if request.method == 'POST':
-        if not form.validate_on_submit():
-            message = ""
-            for field in ['TeamName']:
-                try:
-                    err = eval(f"form.{field}.errors[-1]")
-                except IndexError:
-                    err = ""
-                message += err + ", "
-            return render_template('add_team.html', form = form, message = message)
+    if request.method == 'POST':     
         TeamName = form.TeamName.data
         AddNewTeam= Team(TeamName = TeamName)
         db.session.add(AddNewTeam)
