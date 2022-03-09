@@ -11,8 +11,7 @@ def home():
 
     return render_template('index.html', num = num_Players, Players = Players, Teams = Teams)
     
-  
-
+    
 @app.route('/create-player', methods=['GET', 'POST'])
 def create():
     message = None
@@ -37,16 +36,7 @@ def create():
 def create_team():
     message = None
     form = AddTeam()
-    if request.method == 'POST':
-        if not form.validate_on_submit():
-            message = ""
-            for field in ['TeamName']:
-                try:
-                    err = eval(f"form.{field}.errors[-1]")
-                except IndexError:
-                    err = ""
-                message += err + ", "
-            return render_template('add_team.html', form = form, message = message)
+    if request.method == 'POST':     
         TeamName = form.TeamName.data
         AddNewTeam= Team(TeamName = TeamName)
         db.session.add(AddNewTeam)
@@ -64,7 +54,7 @@ def update(pk):
         player.FirstName = form.FirstName.data
         player.LastName = form.LastName.data
         player.Position = form.Position.data
-        player.Team_id = int(form.team_id.data)
+        player.Team_id = int(form.Team_id.data)
         db.session.commit()
         return redirect(url_for('home'))
     return render_template('add_player.html', form = form, ptitle = "Update Player")
