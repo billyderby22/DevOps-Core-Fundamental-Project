@@ -11,8 +11,7 @@ def home():
 
     return render_template('index.html', num = num_Players, Players = Players, Teams = Teams)
     
-  
-
+    
 @app.route('/create-player', methods=['GET', 'POST'])
 def create():
     message = None
