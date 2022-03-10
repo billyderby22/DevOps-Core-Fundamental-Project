@@ -46,12 +46,15 @@ There is also another type of testing, integration testing. Integration testing 
 
 ## The App
 When the user navigates to the app the home page will be presented. On this page the user will be able to see already created teams with the players that are assigned to the team underneath. Aswell as this the user will have an option to delete a player as well as an option to update the player where they can change any attribute associated with the player. 
+
 ![homepage](Images/Screenshot%202022-03-09%20at%2009.33.37.png)
 
 The user can navigate to the ‘Add a player’ page where a form to create a player will be presented. Here they can create a player and assign them to a team. 
+
 ![addplayerpage](Images/Screenshot%202022-03-09%20at%2009.34.35.png)
 
 The final page a user can navigate to is the ‘Create a team’ page. Here a user can create a team that can later have players assigned to. 
+
 ![createateampage](Images/Screenshot%202022-03-09%20at%2009.34.42.png)
 
 ## Known Issues
