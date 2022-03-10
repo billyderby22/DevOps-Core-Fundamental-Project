@@ -39,9 +39,13 @@ Before I started building the app I created a risk assessment to identify risks 
 Testing the app was a key part of the development process, first of all unit testing was needed to test the functionality of the app. I wrote tests for all of the CRUD functions to make sure they all worked. The goal of the unit tests was to get as high coverage as possible. 
 
 I achieved 96% coverage from the unit tests.
+
 ![coverage report](Images/jenkins%20cov%20report.png)
+
 The tests were automated using Jenkins via webhooks.
+
 ![automated tests](Images/Automated%20Tests%20with%20Jenkins.png)
+
 There is also another type of testing, integration testing. Integration testing is a type of software testing in which we test the application as a whole, rather than mocking the application to it's routes as we do in unit testing. Selenium is used to simulate a user interacting with the application directly and test the results. Ideally this would have been implemented to ensure the app is fully functional and has no bugs. 
 
 ## The App
